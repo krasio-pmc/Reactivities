@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Activity } from "../models/activity";
 import axios from "axios";
-import { Container, List } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
+import { v4 as uuid } from "uuid";
 import NavBar from "./NavBar";
 import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
 
@@ -37,6 +38,18 @@ function App() {
   function handleCloseForm() {
     setEditMode(false);
   }
+
+  function handleCreateOrEditActivity(activity: Activity) {
+    activity.id
+      ? setActivities([...activities.filter((a) => a.id !== activity.id)])
+      : setActivities([...activities, { ...activity, id: uuid() }]);
+    setEditMode(false);
+    setSelectedActivity(activity);
+  }
+
+  function handleDeleteActivity(id: string) {
+    setActivities([...activities.filter((a) => a.id !== id)]);
+  }
   return (
     <>
       <NavBar openForm={handleOpenForm} />
@@ -49,6 +62,8 @@ function App() {
           editMode={editMode}
           openForm={handleOpenForm}
           closeForm={handleCloseForm}
+          createOrEdit={handleCreateOrEditActivity}
+          deleteActivity={handleDeleteActivity}
         />
       </Container>
     </>
