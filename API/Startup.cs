@@ -44,7 +44,8 @@ namespace API
 
             services.AddCors(opt=>{
                 opt.AddPolicy("CorsPolicy", policy=>{
-                    policy.AllowAnyMethod().AllowAnyMethod().WithOrigins("http://localhost:3000");
+                    policy.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+                  //  policy.AllowAnyMethod().AllowAnyMethod().WithOrigins("http://localhost:5000");
                 });
             });
 
@@ -72,7 +73,8 @@ namespace API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers()
+                .RequireCors("CorsPolicy");
             });
         }
     }
