@@ -3,16 +3,19 @@ import ReactDOM from "react-dom";
 import "./app/layout/styles.css";
 import "semantic-ui-css/semantic.min.css";
 import "react-calendar/dist/Calendar.css";
+import "react-toastify/dist/ReactToastify.min.css";
 import App from "./app/layout/App";
 import reportWebVitals from "./reportWebVitals";
 import { store, StoreContext } from "./app/stores/store";
-import { BrowserRouter } from "react-router-dom";
+import { CustomRouter } from "./app/layout/CustomRouter";
+import customHistory from "./app/layout/history";
+//export const history = createBrowserHistory();
 
 ReactDOM.render(
   <StoreContext.Provider value={store}>
-    <BrowserRouter>
+    <CustomRouter history={customHistory}>
       <App />
-    </BrowserRouter>
+    </CustomRouter>
   </StoreContext.Provider>,
   document.getElementById("root")
 );
