@@ -1,4 +1,3 @@
-import { th } from "date-fns/locale";
 import { User } from "./user";
 
 export interface Profile {

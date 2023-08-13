@@ -21,7 +21,7 @@ export default observer(function ActivityDetailedSidebar({
         inverted
         color="teal"
       >
-        {attendees.length} {attendees.length == 1 ? "person" : "people"} going
+        {attendees.length} {attendees.length === 1 ? "person" : "people"} going
       </Segment>
       <Segment attached>
         <List relaxed divided>
